@@ -1,4 +1,4 @@
-const { withInfoPlist } = require('@expo/config-plugins')
+const { withInfoPlist, withAndroidManifest } = require('@expo/config-plugins')
 
 const withSpeechToText = (config, props = {}) => {
   const {
@@ -6,13 +6,35 @@ const withSpeechToText = (config, props = {}) => {
     speechRecognitionPermission = 'This app needs access to speech recognition to convert your speech to text.',
   } = props
 
-  return withInfoPlist(config, (cfg) => {
+  // iOS: Add privacy descriptions
+  config = withInfoPlist(config, (cfg) => {
     cfg.modResults.NSMicrophoneUsageDescription =
       cfg.modResults.NSMicrophoneUsageDescription ?? microphonePermission
     cfg.modResults.NSSpeechRecognitionUsageDescription =
-      cfg.modResults.NSSpeechRecognitionUsageDescription ?? speechRecognitionPermission
+      cfg.modResults.NSSpeechRecognitionUsageDescription ??
+      speechRecognitionPermission
     return cfg
   })
+
+  // Android: Add RECORD_AUDIO permission
+  config = withAndroidManifest(config, (cfg) => {
+    const androidManifest = cfg.modResults.manifest
+    if (!androidManifest['uses-permission']) {
+      androidManifest['uses-permission'] = []
+    }
+    if (
+      !androidManifest['uses-permission'].find(
+        (perm) => perm.$['android:name'] === 'android.permission.RECORD_AUDIO'
+      )
+    ) {
+      androidManifest['uses-permission'].push({
+        $: { 'android:name': 'android.permission.RECORD_AUDIO' },
+      })
+    }
+    return cfg
+  })
+
+  return config
 }
 
 module.exports = withSpeechToText
