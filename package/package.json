@@ -4,7 +4,7 @@
   "description": "@enginnblt/react-native-nitro-speech-to-text",
   "main": "lib/index",
   "module": "lib/index",
-  "types": "lib/index.d.ts",
+  "types": "src/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
   "files": [

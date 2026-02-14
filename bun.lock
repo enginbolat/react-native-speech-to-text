@@ -37,7 +37,7 @@
     },
     "package": {
       "name": "@enginnblt/react-native-nitro-speech-to-text",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "devDependencies": {
         "@react-native/eslint-config": "0.83.0",
         "@types/react": "^19.1.03",
