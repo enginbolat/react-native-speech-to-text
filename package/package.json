@@ -51,7 +51,22 @@
   },
   "keywords": [
     "react-native",
-    "nitro"
+    "ios",
+    "android",
+    "nitro",
+    "nitro-modules",
+    "margelo",
+    "speech-to-text",
+    "stt",
+    "speech-recognition",
+    "voice-recognition",
+    "transcription",
+    "audio-transcription",
+    "voice",
+    "real-time",
+    "expo",
+    "expo-module",
+    "native-module"
   ],
   "repository": {
     "type": "git",
