@@ -79,7 +79,8 @@
   },
   "homepage": "https://github.com/enginbolatFD/react-native-nitro-speech-to-text#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
     "@react-native/eslint-config": "0.83.0",
