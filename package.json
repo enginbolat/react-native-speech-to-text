@@ -1,0 +1,29 @@
+{
+  "name": "react-native-speech-to-text-workspace",
+  "private": true,
+  "workspaces": [
+    "package",
+    "example"
+  ],
+  "trustedDependencies": [
+    "react-native-vision-camera"
+  ],
+  "scripts": {
+    "lint": "bun run --filter '*' lint",
+    "typecheck": "bun run --filter '*' typecheck",
+    "test": "bun run --filter '*' test",
+    "prepare": "husky"
+  },
+  "packageManager": "bun@1.1.20",
+  "devDependencies": {
+    "eslint": "^9.39.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": "eslint --fix",
+    "*.{json,md}": "prettier --write"
+  }
+}

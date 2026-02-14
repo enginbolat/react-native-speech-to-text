@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "example",
+    "slug": "example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.enginnblt.example",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Bu uygulama konuşmayı metne çevirmek için mikrofonu kullanır.",
+        "NSSpeechRecognitionUsageDescription": "Bu uygulama konuşmayı metne çevirmek için konuşma tanıma kullanır."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.enginnblt.example",
+      "permissions": ["RECORD_AUDIO", "INTERNET"]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
