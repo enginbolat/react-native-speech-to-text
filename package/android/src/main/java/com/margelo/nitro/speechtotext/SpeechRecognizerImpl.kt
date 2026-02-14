@@ -23,6 +23,32 @@ import kotlin.coroutines.suspendCoroutine
 class SpeechRecognizerImpl : HybridSpeechRecognizerSpec() {
   private var engine: SpeechRecognitionEngine? = null
 
+  override fun requestPermission(): Promise<PermissionStatus> {
+    val context = NitroModules.applicationContext ?: return Promise.resolved(PermissionStatus.DENIED)
+    
+    if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+      return Promise.resolved(PermissionStatus.GRANTED)
+    }
+
+    return Promise.async {
+      suspendCoroutine { continuation ->
+        runOnMainThread {
+          val activity = (context as? ReactContext)?.currentActivity
+          if (activity != null) {
+            ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.RECORD_AUDIO), 101)
+            // Since we can't easily wait for the result from this context, we return undetermined or check again.
+            // For simplicity in this library, we'll return UNDETERMINED if requesting, 
+            // and the JS layer can re-check or we can just resume after request call.
+            // Better: just resume with the current state (which will be granted or denied after user interacts).
+            continuation.resume(PermissionStatus.UNDETERMINED)
+          } else {
+            continuation.resume(PermissionStatus.DENIED)
+          }
+        }
+      }
+    }
+  }
+
   override fun isAvailable(): Promise<Boolean> {
     val context = NitroModules.applicationContext ?: return Promise.resolved(false)
     val isAvailable = android.speech.SpeechRecognizer.isRecognitionAvailable(context)
@@ -86,7 +112,37 @@ class SpeechRecognizerImpl : HybridSpeechRecognizerSpec() {
   ): Promise<Unit> {
     return Promise.async {
       suspendCoroutine { continuation ->
-        continuation.resumeWithException(Error("File transcription is not supported on Android."))
+        runOnMainThread {
+          val context = NitroModules.applicationContext
+          if (context == null) {
+            continuation.resumeWithException(Exception("Context is null"))
+            return@runOnMainThread
+          }
+
+          // Check API level for file transcription support
+          if (android.os.Build.VERSION.SDK_INT < 33) {
+            continuation.resumeWithException(Exception("File transcription requires Android 13 (API 33) or above."))
+            return@runOnMainThread
+          }
+
+          val newEngine = SpeechRecognitionEngine(context)
+          this.engine = newEngine
+          
+          newEngine.onReady = {
+             try {
+               continuation.resume(Unit)
+             } catch (e: Exception) { }
+          }
+          newEngine.onStartError = {
+             try {
+               continuation.resumeWithException(it)
+             } catch (e: Exception) { }
+          }
+          
+          newEngine.startTranscription(filePath, locale, callbacks, options) {
+            this.engine = null
+          }
+        }
       }
     }
   }

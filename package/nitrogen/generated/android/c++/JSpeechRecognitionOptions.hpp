@@ -10,6 +10,8 @@
 #include <fbjni/fbjni.h>
 #include "SpeechRecognitionOptions.hpp"
 
+#include "JTaskHint.hpp"
+#include "TaskHint.hpp"
 #include <optional>
 #include <string>
 #include <vector>
@@ -35,6 +37,12 @@ namespace margelo::nitro::speechtotext {
       static const auto clazz = javaClassStatic();
       static const auto fieldContextualStrings = clazz->getField<jni::JArrayClass<jni::JString>>("contextualStrings");
       jni::local_ref<jni::JArrayClass<jni::JString>> contextualStrings = this->getFieldValue(fieldContextualStrings);
+      static const auto fieldRequiresOnDeviceRecognition = clazz->getField<jni::JBoolean>("requiresOnDeviceRecognition");
+      jni::local_ref<jni::JBoolean> requiresOnDeviceRecognition = this->getFieldValue(fieldRequiresOnDeviceRecognition);
+      static const auto fieldTaskHint = clazz->getField<JTaskHint>("taskHint");
+      jni::local_ref<JTaskHint> taskHint = this->getFieldValue(fieldTaskHint);
+      static const auto fieldAddsPunctuation = clazz->getField<jni::JBoolean>("addsPunctuation");
+      jni::local_ref<jni::JBoolean> addsPunctuation = this->getFieldValue(fieldAddsPunctuation);
       return SpeechRecognitionOptions(
         contextualStrings != nullptr ? std::make_optional([&]() {
           size_t __size = contextualStrings->size();
@@ -45,7 +53,10 @@ namespace margelo::nitro::speechtotext {
             __vector.push_back(__element->toStdString());
           }
           return __vector;
-        }()) : std::nullopt
+        }()) : std::nullopt,
+        requiresOnDeviceRecognition != nullptr ? std::make_optional(static_cast<bool>(requiresOnDeviceRecognition->value())) : std::nullopt,
+        taskHint != nullptr ? std::make_optional(taskHint->toCpp()) : std::nullopt,
+        addsPunctuation != nullptr ? std::make_optional(static_cast<bool>(addsPunctuation->value())) : std::nullopt
       );
     }
 
@@ -55,7 +66,7 @@ namespace margelo::nitro::speechtotext {
      */
     [[maybe_unused]]
     static jni::local_ref<JSpeechRecognitionOptions::javaobject> fromCpp(const SpeechRecognitionOptions& value) {
-      using JSignature = JSpeechRecognitionOptions(jni::alias_ref<jni::JArrayClass<jni::JString>>);
+      using JSignature = JSpeechRecognitionOptions(jni::alias_ref<jni::JArrayClass<jni::JString>>, jni::alias_ref<jni::JBoolean>, jni::alias_ref<JTaskHint>, jni::alias_ref<jni::JBoolean>);
       static const auto clazz = javaClassStatic();
       static const auto create = clazz->getStaticMethod<JSignature>("fromCpp");
       return create(
@@ -69,7 +80,10 @@ namespace margelo::nitro::speechtotext {
             __array->setElement(__i, *__elementJni);
           }
           return __array;
-        }() : nullptr
+        }() : nullptr,
+        value.requiresOnDeviceRecognition.has_value() ? jni::JBoolean::valueOf(value.requiresOnDeviceRecognition.value()) : nullptr,
+        value.taskHint.has_value() ? JTaskHint::fromCpp(value.taskHint.value()) : nullptr,
+        value.addsPunctuation.has_value() ? jni::JBoolean::valueOf(value.addsPunctuation.value()) : nullptr
       );
     }
   };

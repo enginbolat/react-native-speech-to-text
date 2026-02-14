@@ -1,6 +1,15 @@
 import type { HybridObject } from 'react-native-nitro-modules'
 
 /**
+ * Status of speech recognition and microphone permissions.
+ */
+export type PermissionStatus =
+  | 'denied'
+  | 'granted'
+  | 'restricted'
+  | 'undetermined'
+
+/**
  * Known error codes for speech recognition.
  */
 export type SpeechErrorCode =
@@ -86,6 +95,11 @@ export interface SpeechRecognizer extends HybridObject<{
   ios: 'swift'
   android: 'kotlin'
 }> {
+  /**
+   * Requests both microphone and speech recognition permissions.
+   */
+  requestPermission(): Promise<PermissionStatus>
+
   /**
    * Checks if speech recognition is available on the current device.
    */

@@ -10,6 +10,8 @@
 // Forward declarations of C++ defined types
 // Forward declaration of `HybridSpeechRecognizerSpec` to properly resolve imports.
 namespace margelo::nitro::speechtotext { class HybridSpeechRecognizerSpec; }
+// Forward declaration of `PermissionStatus` to properly resolve imports.
+namespace margelo::nitro::speechtotext { enum class PermissionStatus; }
 // Forward declaration of `SpeechCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechCallbacks; }
 // Forward declaration of `SpeechErrorResult` to properly resolve imports.
@@ -29,6 +31,7 @@ namespace NitroSpeechToText { class HybridSpeechRecognizerSpec_cxx; }
 
 // Include C++ defined types
 #include "HybridSpeechRecognizerSpec.hpp"
+#include "PermissionStatus.hpp"
 #include "SpeechCallbacks.hpp"
 #include "SpeechErrorResult.hpp"
 #include "SpeechRecognitionOptions.hpp"
@@ -51,6 +54,62 @@ namespace NitroSpeechToText { class HybridSpeechRecognizerSpec_cxx; }
  */
 namespace margelo::nitro::speechtotext::bridge::swift {
 
+  // pragma MARK: std::shared_ptr<Promise<PermissionStatus>>
+  /**
+   * Specialized version of `std::shared_ptr<Promise<PermissionStatus>>`.
+   */
+  using std__shared_ptr_Promise_PermissionStatus__ = std::shared_ptr<Promise<PermissionStatus>>;
+  inline std::shared_ptr<Promise<PermissionStatus>> create_std__shared_ptr_Promise_PermissionStatus__() noexcept {
+    return Promise<PermissionStatus>::create();
+  }
+  inline PromiseHolder<PermissionStatus> wrap_std__shared_ptr_Promise_PermissionStatus__(std::shared_ptr<Promise<PermissionStatus>> promise) noexcept {
+    return PromiseHolder<PermissionStatus>(std::move(promise));
+  }
+  
+  // pragma MARK: std::function<void(PermissionStatus /* result */)>
+  /**
+   * Specialized version of `std::function<void(PermissionStatus)>`.
+   */
+  using Func_void_PermissionStatus = std::function<void(PermissionStatus /* result */)>;
+  /**
+   * Wrapper class for a `std::function<void(PermissionStatus / * result * /)>`, this can be used from Swift.
+   */
+  class Func_void_PermissionStatus_Wrapper final {
+  public:
+    explicit Func_void_PermissionStatus_Wrapper(std::function<void(PermissionStatus /* result */)>&& func): _function(std::make_unique<std::function<void(PermissionStatus /* result */)>>(std::move(func))) {}
+    inline void call(int result) const noexcept {
+      _function->operator()(static_cast<PermissionStatus>(result));
+    }
+  private:
+    std::unique_ptr<std::function<void(PermissionStatus /* result */)>> _function;
+  } SWIFT_NONCOPYABLE;
+  Func_void_PermissionStatus create_Func_void_PermissionStatus(void* NON_NULL swiftClosureWrapper) noexcept;
+  inline Func_void_PermissionStatus_Wrapper wrap_Func_void_PermissionStatus(Func_void_PermissionStatus value) noexcept {
+    return Func_void_PermissionStatus_Wrapper(std::move(value));
+  }
+  
+  // pragma MARK: std::function<void(const std::exception_ptr& /* error */)>
+  /**
+   * Specialized version of `std::function<void(const std::exception_ptr&)>`.
+   */
+  using Func_void_std__exception_ptr = std::function<void(const std::exception_ptr& /* error */)>;
+  /**
+   * Wrapper class for a `std::function<void(const std::exception_ptr& / * error * /)>`, this can be used from Swift.
+   */
+  class Func_void_std__exception_ptr_Wrapper final {
+  public:
+    explicit Func_void_std__exception_ptr_Wrapper(std::function<void(const std::exception_ptr& /* error */)>&& func): _function(std::make_unique<std::function<void(const std::exception_ptr& /* error */)>>(std::move(func))) {}
+    inline void call(std::exception_ptr error) const noexcept {
+      _function->operator()(error);
+    }
+  private:
+    std::unique_ptr<std::function<void(const std::exception_ptr& /* error */)>> _function;
+  } SWIFT_NONCOPYABLE;
+  Func_void_std__exception_ptr create_Func_void_std__exception_ptr(void* NON_NULL swiftClosureWrapper) noexcept;
+  inline Func_void_std__exception_ptr_Wrapper wrap_Func_void_std__exception_ptr(Func_void_std__exception_ptr value) noexcept {
+    return Func_void_std__exception_ptr_Wrapper(std::move(value));
+  }
+  
   // pragma MARK: std::shared_ptr<Promise<bool>>
   /**
    * Specialized version of `std::shared_ptr<Promise<bool>>`.
@@ -83,28 +142,6 @@ namespace margelo::nitro::speechtotext::bridge::swift {
   Func_void_bool create_Func_void_bool(void* NON_NULL swiftClosureWrapper) noexcept;
   inline Func_void_bool_Wrapper wrap_Func_void_bool(Func_void_bool value) noexcept {
     return Func_void_bool_Wrapper(std::move(value));
-  }
-  
-  // pragma MARK: std::function<void(const std::exception_ptr& /* error */)>
-  /**
-   * Specialized version of `std::function<void(const std::exception_ptr&)>`.
-   */
-  using Func_void_std__exception_ptr = std::function<void(const std::exception_ptr& /* error */)>;
-  /**
-   * Wrapper class for a `std::function<void(const std::exception_ptr& / * error * /)>`, this can be used from Swift.
-   */
-  class Func_void_std__exception_ptr_Wrapper final {
-  public:
-    explicit Func_void_std__exception_ptr_Wrapper(std::function<void(const std::exception_ptr& /* error */)>&& func): _function(std::make_unique<std::function<void(const std::exception_ptr& /* error */)>>(std::move(func))) {}
-    inline void call(std::exception_ptr error) const noexcept {
-      _function->operator()(error);
-    }
-  private:
-    std::unique_ptr<std::function<void(const std::exception_ptr& /* error */)>> _function;
-  } SWIFT_NONCOPYABLE;
-  Func_void_std__exception_ptr create_Func_void_std__exception_ptr(void* NON_NULL swiftClosureWrapper) noexcept;
-  inline Func_void_std__exception_ptr_Wrapper wrap_Func_void_std__exception_ptr(Func_void_std__exception_ptr value) noexcept {
-    return Func_void_std__exception_ptr_Wrapper(std::move(value));
   }
   
   // pragma MARK: std::shared_ptr<Promise<void>>
@@ -427,6 +464,15 @@ namespace margelo::nitro::speechtotext::bridge::swift {
   // pragma MARK: std::weak_ptr<HybridSpeechRecognizerSpec>
   using std__weak_ptr_HybridSpeechRecognizerSpec_ = std::weak_ptr<HybridSpeechRecognizerSpec>;
   inline std__weak_ptr_HybridSpeechRecognizerSpec_ weakify_std__shared_ptr_HybridSpeechRecognizerSpec_(const std::shared_ptr<HybridSpeechRecognizerSpec>& strong) noexcept { return strong; }
+  
+  // pragma MARK: Result<std::shared_ptr<Promise<PermissionStatus>>>
+  using Result_std__shared_ptr_Promise_PermissionStatus___ = Result<std::shared_ptr<Promise<PermissionStatus>>>;
+  inline Result_std__shared_ptr_Promise_PermissionStatus___ create_Result_std__shared_ptr_Promise_PermissionStatus___(const std::shared_ptr<Promise<PermissionStatus>>& value) noexcept {
+    return Result<std::shared_ptr<Promise<PermissionStatus>>>::withValue(value);
+  }
+  inline Result_std__shared_ptr_Promise_PermissionStatus___ create_Result_std__shared_ptr_Promise_PermissionStatus___(const std::exception_ptr& error) noexcept {
+    return Result<std::shared_ptr<Promise<PermissionStatus>>>::withError(error);
+  }
   
   // pragma MARK: Result<std::shared_ptr<Promise<bool>>>
   using Result_std__shared_ptr_Promise_bool___ = Result<std::shared_ptr<Promise<bool>>>;

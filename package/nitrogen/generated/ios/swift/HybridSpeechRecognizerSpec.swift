@@ -13,6 +13,7 @@ public protocol HybridSpeechRecognizerSpec_protocol: HybridObject {
   
 
   // Methods
+  func requestPermission() throws -> Promise<PermissionStatus>
   func isAvailable() throws -> Promise<Bool>
   func startListening(locale: String, callbacks: SpeechCallbacks?, options: SpeechRecognitionOptions?) throws -> Promise<Void>
   func startTranscription(filePath: String, locale: String, callbacks: TranscriptionCallbacks?, options: SpeechRecognitionOptions?) throws -> Promise<Void>

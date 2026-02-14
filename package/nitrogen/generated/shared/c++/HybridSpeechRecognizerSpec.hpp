@@ -13,6 +13,8 @@
 #error NitroModules cannot be found! Are you sure you installed NitroModules properly?
 #endif
 
+// Forward declaration of `PermissionStatus` to properly resolve imports.
+namespace margelo::nitro::speechtotext { enum class PermissionStatus; }
 // Forward declaration of `SpeechCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechCallbacks; }
 // Forward declaration of `SpeechRecognitionOptions` to properly resolve imports.
@@ -20,6 +22,7 @@ namespace margelo::nitro::speechtotext { struct SpeechRecognitionOptions; }
 // Forward declaration of `TranscriptionCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct TranscriptionCallbacks; }
 
+#include "PermissionStatus.hpp"
 #include <NitroModules/Promise.hpp>
 #include <string>
 #include "SpeechCallbacks.hpp"
@@ -58,6 +61,7 @@ namespace margelo::nitro::speechtotext {
 
     public:
       // Methods
+      virtual std::shared_ptr<Promise<PermissionStatus>> requestPermission() = 0;
       virtual std::shared_ptr<Promise<bool>> isAvailable() = 0;
       virtual std::shared_ptr<Promise<void>> startListening(const std::string& locale, const std::optional<SpeechCallbacks>& callbacks, const std::optional<SpeechRecognitionOptions>& options) = 0;
       virtual std::shared_ptr<Promise<void>> startTranscription(const std::string& filePath, const std::string& locale, const std::optional<TranscriptionCallbacks>& callbacks, const std::optional<SpeechRecognitionOptions>& options) = 0;

@@ -55,6 +55,7 @@ namespace margelo::nitro::speechtotext {
 
   public:
     // Methods
+    std::shared_ptr<Promise<PermissionStatus>> requestPermission() override;
     std::shared_ptr<Promise<bool>> isAvailable() override;
     std::shared_ptr<Promise<void>> startListening(const std::string& locale, const std::optional<SpeechCallbacks>& callbacks, const std::optional<SpeechRecognitionOptions>& options) override;
     std::shared_ptr<Promise<void>> startTranscription(const std::string& filePath, const std::string& locale, const std::optional<TranscriptionCallbacks>& callbacks, const std::optional<SpeechRecognitionOptions>& options) override;

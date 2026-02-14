@@ -48,6 +48,10 @@ abstract class HybridSpeechRecognizerSpec: HybridObject() {
   // Methods
   @DoNotStrip
   @Keep
+  abstract fun requestPermission(): Promise<PermissionStatus>
+  
+  @DoNotStrip
+  @Keep
   abstract fun isAvailable(): Promise<Boolean>
   
   @DoNotStrip

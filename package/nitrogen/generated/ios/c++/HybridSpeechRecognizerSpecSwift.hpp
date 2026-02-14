@@ -12,6 +12,8 @@
 // Forward declaration of `HybridSpeechRecognizerSpec_cxx` to properly resolve imports.
 namespace NitroSpeechToText { class HybridSpeechRecognizerSpec_cxx; }
 
+// Forward declaration of `PermissionStatus` to properly resolve imports.
+namespace margelo::nitro::speechtotext { enum class PermissionStatus; }
 // Forward declaration of `SpeechCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechCallbacks; }
 // Forward declaration of `SpeechErrorResult` to properly resolve imports.
@@ -25,6 +27,7 @@ namespace margelo::nitro::speechtotext { struct TranscriptionCallbacks; }
 // Forward declaration of `TranscriptionSegment` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct TranscriptionSegment; }
 
+#include "PermissionStatus.hpp"
 #include <NitroModules/Promise.hpp>
 #include <string>
 #include "SpeechCallbacks.hpp"
@@ -87,6 +90,14 @@ namespace margelo::nitro::speechtotext {
 
   public:
     // Methods
+    inline std::shared_ptr<Promise<PermissionStatus>> requestPermission() override {
+      auto __result = _swiftPart.requestPermission();
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+      auto __value = std::move(__result.value());
+      return __value;
+    }
     inline std::shared_ptr<Promise<bool>> isAvailable() override {
       auto __result = _swiftPart.isAvailable();
       if (__result.hasError()) [[unlikely]] {

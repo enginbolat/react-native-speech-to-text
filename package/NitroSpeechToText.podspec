@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => min_ios_version_supported, :visionos => 1.0 }
-  s.source       = { :git => "https://github.com/enginbolatFD/react-native-speech-to-text.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/enginbolat/react-native-nitro-speech-to-text.git", :tag => "#{s.version}" }
   s.frameworks   = "Speech", "AVFoundation"
 
   s.resource_bundles = { 'NitroSpeechToText' => ['ios/PrivacyInfo.xcprivacy'] }

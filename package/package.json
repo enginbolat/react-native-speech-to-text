@@ -1,7 +1,7 @@
 {
-  "name": "react-native-speech-to-text",
+  "name": "@enginnblt/react-native-nitro-speech-to-text",
   "version": "0.0.1",
-  "description": "react-native-speech-to-text",
+  "description": "@enginnblt/react-native-nitro-speech-to-text",
   "main": "lib/index",
   "module": "lib/index",
   "types": "lib/index.d.ts",
@@ -55,14 +55,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enginbolatFD/react-native-speech-to-text.git"
+    "url": "git+https://github.com/enginbolatFD/react-native-nitro-speech-to-text.git"
   },
   "author": "enginbolatFD (https://github.com/enginbolatFD)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enginbolatFD/react-native-speech-to-text/issues"
+    "url": "https://github.com/enginbolatFD/react-native-nitro-speech-to-text/issues"
   },
-  "homepage": "https://github.com/enginbolatFD/react-native-speech-to-text#readme",
+  "homepage": "https://github.com/enginbolatFD/react-native-nitro-speech-to-text#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -75,7 +75,7 @@
     "nitrogen": "*",
     "prettier": "^3.3.3",
     "react": "19.2.0",
-    "react-native": "0.83.0",
+    "react-native": "0.84.0",
     "react-native-nitro-modules": "*",
     "typescript": "^5.8.3"
   },

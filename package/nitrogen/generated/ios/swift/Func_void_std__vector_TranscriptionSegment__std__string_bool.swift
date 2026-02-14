@@ -22,12 +22,7 @@ public final class Func_void_std__vector_TranscriptionSegment__std__string_bool 
 
   @inline(__always)
   public func call(segments: bridge.std__vector_TranscriptionSegment_, transcription: std.string, isFinal: Bool) -> Void {
-    var __segResult: [TranscriptionSegment] = []
-    let __segCount = segments.size()
-    for __i in 0..<Int(__segCount) {
-      __segResult.append(segments[__i])
-    }
-    self.closure(__segResult, String(transcription), isFinal)
+    self.closure(segments.map({ __item in __item }), String(transcription), isFinal)
   }
 
   /**

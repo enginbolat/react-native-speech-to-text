@@ -7,11 +7,32 @@
 
 import NitroModules
 import Speech
+import AVFoundation
 
 public final class SpeechRecognizerImpl: HybridSpeechRecognizerSpec {
   private var engine: SpeechRecognitionEngine?
 
   public override init() {}
+
+  public func requestPermission() throws -> Promise<PermissionStatus> {
+    return Promise.async {
+      // 1. Request Speech Authorization
+      let speechStatus = await withCheckedContinuation { (cont: CheckedContinuation<SFSpeechRecognizerAuthorizationStatus, Never>) in
+        SFSpeechRecognizer.requestAuthorization { cont.resume(returning: $0) }
+      }
+
+      if speechStatus == .denied { return .denied }
+      if speechStatus == .restricted { return .restricted }
+      if speechStatus == .notDetermined { return .undetermined }
+
+      // 2. Request Microphone Authorization (Record Permission)
+      let audioStatus = await withCheckedContinuation { (cont: CheckedContinuation<Bool, Never>) in
+        AVAudioSession.sharedInstance().requestRecordPermission { cont.resume(returning: $0) }
+      }
+
+      return audioStatus ? .granted : .denied
+    }
+  }
 
   public func isAvailable() throws -> Promise<Bool> {
     Promise.async {

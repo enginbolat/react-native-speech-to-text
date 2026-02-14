@@ -4,7 +4,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "react-native-speech-to-text": ["../src/index"]
+      "@enginnblt/react-native-nitro-speech-to-text": ["../package/src/index"]
     }
-  },
+  }
 }

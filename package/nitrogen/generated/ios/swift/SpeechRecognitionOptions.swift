@@ -57,12 +57,7 @@ public extension SpeechRecognitionOptions {
     return { () -> [String]? in
       if bridge.has_value_std__optional_std__vector_std__string__(self.__contextualStrings) {
         let __unwrapped = bridge.get_std__optional_std__vector_std__string__(self.__contextualStrings)
-        var __result: [String] = []
-        let __count = __unwrapped.size()
-        for __i in 0..<Int(__count) {
-          __result.append(String(__unwrapped[__i]))
-        }
-        return __result
+        return __unwrapped.map({ __item in String(__item) })
       } else {
         return nil
       }

@@ -19,7 +19,16 @@ import com.facebook.proguard.annotations.DoNotStrip
 data class SpeechRecognitionOptions(
   @DoNotStrip
   @Keep
-  val contextualStrings: Array<String>?
+  val contextualStrings: Array<String>?,
+  @DoNotStrip
+  @Keep
+  val requiresOnDeviceRecognition: Boolean?,
+  @DoNotStrip
+  @Keep
+  val taskHint: TaskHint?,
+  @DoNotStrip
+  @Keep
+  val addsPunctuation: Boolean?
 ) {
   /* primary constructor */
 
@@ -31,8 +40,8 @@ data class SpeechRecognitionOptions(
     @Keep
     @Suppress("unused")
     @JvmStatic
-    private fun fromCpp(contextualStrings: Array<String>?): SpeechRecognitionOptions {
-      return SpeechRecognitionOptions(contextualStrings)
+    private fun fromCpp(contextualStrings: Array<String>?, requiresOnDeviceRecognition: Boolean?, taskHint: TaskHint?, addsPunctuation: Boolean?): SpeechRecognitionOptions {
+      return SpeechRecognitionOptions(contextualStrings, requiresOnDeviceRecognition, taskHint, addsPunctuation)
     }
   }
 }

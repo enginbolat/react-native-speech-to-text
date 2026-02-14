@@ -1,5 +1,5 @@
 {
-  "name": "react-native-speech-to-text-workspace",
+  "name": "@enginnblt/react-native-nitro-speech-to-text-workspace",
   "private": true,
   "workspaces": [
     "package",

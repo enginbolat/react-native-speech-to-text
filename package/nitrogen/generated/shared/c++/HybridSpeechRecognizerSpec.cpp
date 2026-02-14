@@ -14,6 +14,7 @@ namespace margelo::nitro::speechtotext {
     HybridObject::loadHybridMethods();
     // load custom methods/properties
     registerHybrids(this, [](Prototype& prototype) {
+      prototype.registerHybridMethod("requestPermission", &HybridSpeechRecognizerSpec::requestPermission);
       prototype.registerHybridMethod("isAvailable", &HybridSpeechRecognizerSpec::isAvailable);
       prototype.registerHybridMethod("startListening", &HybridSpeechRecognizerSpec::startListening);
       prototype.registerHybridMethod("startTranscription", &HybridSpeechRecognizerSpec::startTranscription);

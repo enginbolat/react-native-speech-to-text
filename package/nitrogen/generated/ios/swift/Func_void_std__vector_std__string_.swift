@@ -22,12 +22,7 @@ public final class Func_void_std__vector_std__string_ {
 
   @inline(__always)
   public func call(value: bridge.std__vector_std__string_) -> Void {
-    var __result: [String] = []
-    let __count = value.size()
-    for __i in 0..<Int(__count) {
-      __result.append(String(value[__i]))
-    }
-    self.closure(__result)
+    self.closure(value.map({ __item in String(__item) }))
   }
 
   /**

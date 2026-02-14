@@ -7,19 +7,25 @@
 
 #include "JHybridSpeechRecognizerSpec.hpp"
 
+// Forward declaration of `PermissionStatus` to properly resolve imports.
+namespace margelo::nitro::speechtotext { enum class PermissionStatus; }
 // Forward declaration of `SpeechCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechCallbacks; }
 // Forward declaration of `SpeechErrorResult` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechErrorResult; }
 // Forward declaration of `SpeechRecognitionOptions` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechRecognitionOptions; }
+// Forward declaration of `TaskHint` to properly resolve imports.
+namespace margelo::nitro::speechtotext { enum class TaskHint; }
 // Forward declaration of `TranscriptionCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct TranscriptionCallbacks; }
 // Forward declaration of `TranscriptionSegment` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct TranscriptionSegment; }
 
+#include "PermissionStatus.hpp"
 #include <NitroModules/Promise.hpp>
 #include <NitroModules/JPromise.hpp>
+#include "JPermissionStatus.hpp"
 #include <NitroModules/JUnit.hpp>
 #include <string>
 #include "SpeechCallbacks.hpp"
@@ -36,6 +42,8 @@ namespace margelo::nitro::speechtotext { struct TranscriptionSegment; }
 #include "JFunc_void_double.hpp"
 #include "SpeechRecognitionOptions.hpp"
 #include "JSpeechRecognitionOptions.hpp"
+#include "TaskHint.hpp"
+#include "JTaskHint.hpp"
 #include "TranscriptionCallbacks.hpp"
 #include "JTranscriptionCallbacks.hpp"
 #include "TranscriptionSegment.hpp"
@@ -81,6 +89,22 @@ namespace margelo::nitro::speechtotext {
   
 
   // Methods
+  std::shared_ptr<Promise<PermissionStatus>> JHybridSpeechRecognizerSpec::requestPermission() {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<JPromise::javaobject>()>("requestPermission");
+    auto __result = method(_javaPart);
+    return [&]() {
+      auto __promise = Promise<PermissionStatus>::create();
+      __result->cthis()->addOnResolvedListener([=](const jni::alias_ref<jni::JObject>& __boxedResult) {
+        auto __result = jni::static_ref_cast<JPermissionStatus>(__boxedResult);
+        __promise->resolve(__result->toCpp());
+      });
+      __result->cthis()->addOnRejectedListener([=](const jni::alias_ref<jni::JThrowable>& __throwable) {
+        jni::JniException __jniError(__throwable);
+        __promise->reject(std::make_exception_ptr(__jniError));
+      });
+      return __promise;
+    }();
+  }
   std::shared_ptr<Promise<bool>> JHybridSpeechRecognizerSpec::isAvailable() {
     static const auto method = javaClassStatic()->getMethod<jni::local_ref<JPromise::javaobject>()>("isAvailable");
     auto __result = method(_javaPart);

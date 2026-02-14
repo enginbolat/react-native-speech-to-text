@@ -10,6 +10,8 @@
 // Forward declarations of C++ defined types
 // Forward declaration of `HybridSpeechRecognizerSpec` to properly resolve imports.
 namespace margelo::nitro::speechtotext { class HybridSpeechRecognizerSpec; }
+// Forward declaration of `PermissionStatus` to properly resolve imports.
+namespace margelo::nitro::speechtotext { enum class PermissionStatus; }
 // Forward declaration of `SpeechCallbacks` to properly resolve imports.
 namespace margelo::nitro::speechtotext { struct SpeechCallbacks; }
 // Forward declaration of `SpeechErrorResult` to properly resolve imports.
@@ -25,6 +27,7 @@ namespace margelo::nitro::speechtotext { struct TranscriptionSegment; }
 
 // Include C++ defined types
 #include "HybridSpeechRecognizerSpec.hpp"
+#include "PermissionStatus.hpp"
 #include "SpeechCallbacks.hpp"
 #include "SpeechErrorResult.hpp"
 #include "SpeechRecognitionOptions.hpp"
